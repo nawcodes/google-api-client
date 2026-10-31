@@ -1,0 +1,15 @@
+# Virtualenv & Cache
+.venv/
+__pycache__/
+*.pyc
+
+# Environment & Credentials (CRITICAL: NEVER COMMIT)
+*.env
+*.env.*
+*.json
+!*.example.json
+credentials/
+
+# Personal Data & Database CSVs
+*.csv
+!*.example.csv
