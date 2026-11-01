@@ -1,15 +1,28 @@
-# Virtualenv & Cache
+# Python & Virtualenv
 .venv/
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.swp
+*.swo
 
-# Environment & Credentials (CRITICAL: NEVER COMMIT)
-*.env
-*.env.*
+# Secrets & Environment (NEVER COMMIT)
+.env
+.env.*
+!*.example
+!*.example.*
 *.json
 !*.example.json
 credentials/
+token.json
+client_secret*.json
 
-# Personal Data & Database CSVs
+# Data files & Backups
 *.csv
 !*.example.csv
+*.tsv
+*.xlsx
+*.sqlite
+*.db
+*.tar.gz
+*.zip
