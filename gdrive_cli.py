@@ -26,18 +26,23 @@ from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload, MediaInMemoryUpload, MediaFileUpload
 
-# Check potential token locations
-DEFAULT_TOKEN_PATHS = [
-    Path(os.environ.get("GOOGLE_TOKEN_PATH", "")),
-    Path("/opt/data/google_token.json"),
-    Path.home() / ".config/gdrive/google_token.json",
-    Path("google_token.json")
-]
+def get_token_paths():
+    paths = []
+    env_p = os.environ.get("GOOGLE_TOKEN_PATH")
+    if env_p:
+        paths.append(Path(env_p))
+    paths.extend([
+        Path("/opt/data/google_token.json"),
+        Path.home() / ".config/gdrive/google_token.json",
+        Path.home() / ".hermes/google_token.json",
+        Path("google_token.json")
+    ])
+    return paths
 
 def get_service():
     token_file = None
-    for p in DEFAULT_TOKEN_PATHS:
-        if p and p.exists():
+    for p in get_token_paths():
+        if p.is_file():
             token_file = p
             break
             
